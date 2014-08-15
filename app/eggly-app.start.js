@@ -24,6 +24,7 @@ angular.module('Eggly', [
         $scope.isCreating = false;
         $scope.isEditing = false;
         $scope.currentCategory = null;
+        $scope.editedBookmark = null;
 
         function isCurrentCategory(category) {
             return $scope.currentCategory !== null && category.name === $scope.currentCategory.name;
@@ -49,11 +50,8 @@ angular.module('Eggly', [
             return uuid;
         };
 
-        $scope.newBookmark = undefined;
-
         function resetCreateForm() {
             $scope.newBookmark = {
-                id: generateUUID(),
                 title: '',
                 url: '',
                 category: $scope.currentCategory
@@ -64,6 +62,18 @@ angular.module('Eggly', [
             $scope.bookmarks.push($scope.newBookmark);
             resetCreateForm();
         };
+
+        //-------------------------------------------------------------------------------------------------
+        // CRUD
+        //-------------------------------------------------------------------------------------------------
+        function createBookmark(bookmark) {
+            bookmark.id = $scope.bookmarks.length;
+            $scope.bookmarks.push(bookmark);
+
+            resetCreateForm();
+        }
+
+        $scope.createBookmark = createBookmark;
 
         //-------------------------------------------------------------------------------------------------
         // CREATING AND EDITING STATES
@@ -77,7 +87,6 @@ angular.module('Eggly', [
             $scope.isEditing = false;
             resetCreateForm();
         }
-
         function cancelCreating() {
             $scope.isCreating = false;
         }
