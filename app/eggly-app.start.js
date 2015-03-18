@@ -31,7 +31,40 @@ angular.module('Eggly', [
             $scope.currentCategory = category;
         }
 
+        $scope.isEditing = false;
+        $scope.isCreating = false;
+
+        function startCreating() {
+            $scope.isEditing = false;
+            $scope.isCreating = true;
+        }
+
+        function cancelCreating() {
+            $scope.isCreating = false;
+        }
+
+        function startEditing() {
+            $scope.isEditing = true;
+            $scope.isCreating = false;
+        }
+
+        function cancelEditing() {
+            $scope.isEditing = false;
+        }
+
+        function shouldShowCreating() {
+            return $scope.currentCategory != null && $scope.isCreating && !$scope.isEditing;
+        }
+
+        function shouldShowEditing() {
+            return !$scope.isCreating && $scope.isEditing;
+        }
+
         $scope.isCurrentCategory = isCurrentCategory;
         $scope.setCurrentCategory = setCurrentCategory;
+        $scope.startCreating = startCreating
+        $scope.cancelCreating = cancelCreating
+        $scope.startEditing = startEditing
+        $scope.cancelEditing = cancelEditing
     })
 ;
