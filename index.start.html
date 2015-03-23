@@ -32,9 +32,17 @@
                         <a href="{{bookmark.url}}" target="_blank">{{bookmark.title}}</a>
                     </div>
                     <hr>
-                    <button ng-click="startCreating()">Create bookmark</button>
-                    <div ng-if="shouldShowCreating()">Creating!</div>
-                    <div ng-if=shouldShowEditing()>Editing!</div>
+                    <button ng-if="currentCategory" ng-click="startCreating()">Create bookmark</button>
+                    <div ng-if="shouldShowCreating()">Creating!
+                        <button type="button" ng-click="cancelCreating()" ng-if="isCreating">
+                            Cancel
+                        </button>
+                    </div>
+                    <div ng-if=shouldShowEditing()>Editing!
+                        <button type="button" ng-click="cancelEditing()" ng-if="isEditing">
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -29,6 +29,8 @@ angular.module('Eggly', [
 
         function setCurrentCategory(category) {
             $scope.currentCategory = category;
+            cancelCreating();
+            cancelEditing();
         }
 
         $scope.isEditing = false;
@@ -53,18 +55,24 @@ angular.module('Eggly', [
         }
 
         function shouldShowCreating() {
-            return $scope.currentCategory != null && $scope.isCreating && !$scope.isEditing;
+            var should = $scope.currentCategory != null && $scope.isCreating && !$scope.isEditing;
+            console.log('shouldShowCreating: ' + should);
+            return should;
         }
 
         function shouldShowEditing() {
-            return !$scope.isCreating && $scope.isEditing;
+            var should = !$scope.isCreating && $scope.isEditing;
+            console.log('shouldShowEditing: ' + should);
+            return should;
         }
 
         $scope.isCurrentCategory = isCurrentCategory;
         $scope.setCurrentCategory = setCurrentCategory;
-        $scope.startCreating = startCreating
-        $scope.cancelCreating = cancelCreating
-        $scope.startEditing = startEditing
-        $scope.cancelEditing = cancelEditing
+        $scope.startCreating = startCreating;
+        $scope.cancelCreating = cancelCreating;
+        $scope.startEditing = startEditing;
+        $scope.cancelEditing = cancelEditing;
+        $scope.shouldShowCreating = shouldShowCreating;
+        $scope.shouldShowEditing = shouldShowEditing;
     })
 ;
