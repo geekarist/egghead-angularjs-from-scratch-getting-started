@@ -39,7 +39,11 @@
                             Create Bookmark
                         </button>
                         <div ng-if="isCreating">
-                            Create a bookmark!
+                            <form ng-submit="addBookmark()">
+                                <p><label>Title: <input type="text" name="newBookmark.title"></label></p>
+                                <p><label>URL: <input type="text" name="newBookmark.url"></label></p>
+                                <button type="submit">Create</button>
+                            </form>
                             <button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelCreating()">Cancel</button>
                         </div>
                     </div>
