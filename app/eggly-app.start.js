@@ -49,10 +49,10 @@ angular.module('Eggly', [
             return uuid;
         };
 
-        $scope.newBookmark = createBookmark();
+        $scope.newBookmark = undefined;
 
-        function createBookmark() {
-            return {
+        function resetCreateForm() {
+            $scope.newBookmark = {
                 id: generateUUID(),
                 title: '',
                 url: '',
@@ -62,7 +62,7 @@ angular.module('Eggly', [
 
         $scope.addBookmark = function() {
             $scope.bookmarks.push($scope.newBookmark);
-            $scope.newBookmark = createBookmark();
+            resetCreateForm();
         };
 
         //-------------------------------------------------------------------------------------------------
@@ -75,6 +75,7 @@ angular.module('Eggly', [
         function startCreating() {
             $scope.isCreating = true;
             $scope.isEditing = false;
+            resetCreateForm();
         }
 
         function cancelCreating() {
