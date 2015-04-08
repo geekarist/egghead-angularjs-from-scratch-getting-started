@@ -53,8 +53,18 @@
                     </div>
                     <!-- EDITING -->
                     <div ng-if="shouldShowEditing()">
-                        Editing a bookmark!
-                        <button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelEditing()">Cancel</button>
+                        <form class="edit-form" role="form" ng-submit="updateBookmark(editedBookmark)" novalidate>
+                            <div class="form-group">
+                                <label for="bookmark-title-edit">Bookmark Title</label>
+                                <input id="bookmark-title-edit" type="text" class="form-control" ng-model="editedBookmark.title" placeholder="Enter Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookmark-url-edit">Bookmark URL</label>
+                                <input id="bookmark-url-edit" type="text" class="form-control" ng-model="editedBookmark.url" placeholder="Enter URL">
+                            </div>
+                            <button type="submit" class="btn btn-info btn-lg">Save</button>
+                            <button type="button" class="btn btn-default btn-lg pull-right" ng-click="cancelEditing()">Cancel</button>
+                        </form>
                     </div>
                 </div>
             </div>
