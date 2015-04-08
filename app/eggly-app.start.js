@@ -117,9 +117,29 @@ angular.module('Eggly', [
 
         $scope.createBookmark = createBookmark;
 
+        $scope.editedBookmark = null;
+
+        $scope.setEditedBookmark = function(bookmark) {
+            $scope.editedBookmark = angular.copy(bookmark);
+        };
+
+        $scope.updateBookmark = function(bookmark) {
+            var index = _.findIndex($scope.bookmarks, function(b) {
+                return b.id === bookmark.id;
+            });
+            $scope.bookmarks[index] = bookmark;
+            $scope.setEditedBookmark(null);
+            $scope.isEditing = false;
+        };
+
         //-------------------------------------------------------------------------------------------------
         // CREATING AND EDITING STATES
         //-------------------------------------------------------------------------------------------------
+
+        $scope.isSelectedBookmark = function(bookmarkId) {
+            return $scope.editedBookmark !== null && bookmarkId === $scope.editedBookmark.id;
+        };
+
         function shouldShowCreating() {
             return $scope.currentCategory && !$scope.isEditing;
         }

@@ -27,7 +27,10 @@
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <div ng-class="{active: isSelectedBookmark(bookmark.id)}" ng-repeat="bookmark in bookmarks | filter:{category:currentCategory.name}">
                         <button type="button" class="close">&times;</button>
-                        <button type="button" class="btn btn-link" ng-click="startEditing();" ><span class="glyphicon glyphicon-pencil"></span>
+                        <button
+                            type="button" class="btn btn-link"
+                            ng-click="setEditedBookmark(bookmark); startEditing();" >
+                            <span class="glyphicon glyphicon-pencil"></span>
                         </button>
                         <a href="{{bookmark.url}}" target="_blank" data-bookmark-id="{{bookmark.id}}">{{bookmark.title}}</a>
                     </div>
@@ -53,6 +56,7 @@
                     </div>
                     <!-- EDITING -->
                     <div ng-if="shouldShowEditing()">
+                        <h3>Editing {{editedBookmark.title}}</h3>
                         <form class="edit-form" role="form" ng-submit="updateBookmark(editedBookmark)" novalidate>
                             <div class="form-group">
                                 <label for="bookmark-title-edit">Bookmark Title</label>
